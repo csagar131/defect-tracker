@@ -1,7 +1,9 @@
-[
-    {
-        "category" : "UI",
-        "description" : "button style is pending",
-        "priority" : "2"
-    }
-]
+{
+    "defects" : [
+        {
+            "category" : "UI",
+            "description" : "button style is pending",
+            "priority" : "2"
+        }
+    ]
+}
