@@ -1,6 +1,8 @@
 import React from "react";
 import "./AddDefect.css";
 import DefectDetails from './DefectDetails';
+import 'axios';
+// import axios from "axios";
 
 class AddDefect extends React.Component {
   constructor() {
@@ -9,6 +11,7 @@ class AddDefect extends React.Component {
       category: "",
       description: "",
       priority: "",
+      status : "",
     };
   }
 
@@ -20,11 +23,14 @@ class AddDefect extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+
     const defect = {
       category: this.state.category,
       description: this.state.description,
       priority: this.state.priority,
+      status : "open",
     };
+
 
     if (JSON.parse(localStorage.getItem("defects")) === null) {
       localStorage.setItem("defects", JSON.stringify([]));
@@ -39,6 +45,24 @@ class AddDefect extends React.Component {
       category: "",
       description: "",
       priority: "",
+      status : "",
+    });
+
+  }
+
+  closeDefect = (closeIndex) => {
+    const defects =  JSON.parse(localStorage.getItem("defects"));
+    defects.forEach( (element,index) => {
+       if(index === closeIndex){
+         element.status = 'closed';
+       }
+    });
+    localStorage.setItem("defects", JSON.stringify(defects));
+    this.setState({
+      category: "",
+      description: "",
+      priority: "",
+      status : "",
     });
   }
 
@@ -80,7 +104,7 @@ class AddDefect extends React.Component {
           <button>Add Defect</button>
         </div>
       </form>
-        <DefectDetails/>
+        <DefectDetails closeDefect={this.closeDefect}/>
       </React.Fragment>
     );
   }
