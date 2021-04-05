@@ -1,0 +1,13 @@
+#section-add-defect-main{
+    margin: 20px auto;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: whitesmoke;
+}
+
+#section-add-defect-main   > div{
+    margin : 20px auto;
+}
