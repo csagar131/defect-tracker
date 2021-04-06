@@ -1,5 +1,6 @@
 import React from 'react';
 import './DefectDetails.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class DefectDetails extends React.Component{
 
@@ -50,8 +51,8 @@ class DefectDetails extends React.Component{
             // console.log(defects)
         }
         return(
-           <div id='main-section-defect-details'>
-               <h3>Defect  Details</h3>
+           <div id='main-section-defect-details' className="shadow-lg p-3 mb-5 bg-body rounded">
+               <h3 style={{color : 'white'}}>Defect  Details</h3>
                <p style={{color : 'red'}}>Search Result : {defects.length}</p>
                <div>
                     <table border='1'>
@@ -72,7 +73,7 @@ class DefectDetails extends React.Component{
                                         <td>{defect.description}</td>
                                         <td>{defect.priority}</td>
                                         <td>{defect.status}</td>
-                                        <td><button onClick={this.closeDefect}>close defect</button></td>
+                                        <td><button className="btn btn-outline-warning text-dark" onClick={this.closeDefect}>close defect</button></td>
                                     </tr>
                                 )
                             })}

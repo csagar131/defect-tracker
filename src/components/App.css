@@ -41,33 +41,3 @@
 /* user defined css */
 
 
-.form-wrapper{
-  width: 50%;
-  margin: 0 auto;
-  background-color: whitesmoke;
-}
-
-.form-container{
-  padding : 10px 150px;
-}
-
-.header{
-  position: fixed;
-  width: 100%;
-  top: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: whitesmoke;
-  padding : 0 20px;
-}
-
-.right-header-section{
-  display: inline-flex;
-  justify-content: space-between;
-  margin-right:  50px;
-}
-
-.right-header-section p {
-  margin-right: 20px;
-}
