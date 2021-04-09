@@ -1,72 +1,60 @@
-import React from 'react';
+import React, {useRef, useState} from 'react';
 import Form from 'react-bootstrap/Form';
 import 'bootstrap/dist/css/bootstrap.css';
 import Button from 'react-bootstrap/Button';
+import Alert from 'react-bootstrap/Alert'
 import './login.css';
+import {Link} from 'react-router-dom';
+import useAuth from '../contexts/AuthContext';
 
-class Login extends React.Component {
 
-    constructor(){
-        super();
-        this.state = {
-            username : '',
-            password : '',
-            message : '',
-        }
-    }
-
-    changeValue = (e) => {
-          let field = e.target.name;
-          let value = e.target.value;
-          this.setState({
-              [field] : value},
-          )
-          
-    }
-
-    login = (e) =>{
+export default function Login(){
+    const [error, setError] = useState('')
+    const [loading, setLoading] = useState(false)
+    const emailRef = useRef();
+    const passwordRef = useRef();
+    const {login} = useAuth();
+    
+    async function handleSubmit(e){
         e.preventDefault();
-        if(this.state.username === '' || this.state.password === ''){
-             this.setState({
-                 message : 'Please provid all the details',
-             })
-             
-             alert('Please Provide all the details')
+        if(emailRef.current.value === '' || passwordRef.current.value === ''){
+             return setError('Please provid all the details')
         }
         else{
-            alert('login success')
+            setLoading(false)
+            try{
+                setError('')
+                await login(emailRef.current.value,passwordRef.current.value)
+            } catch (error) {
+                return setError('Login Failed')
+            }
+            setLoading(false)
         }
-        
     }
 
-
-
-    render() {
         return  <React.Fragment>
                     <div className='form-wrapper shadow-lg p-3 mb-5 bg-body rounded'>
+                        {error && <Alert variant='danger'>{error}</Alert>}
                         <h2 style={{textAlign : 'center'}}>Defect Tracker</h2>
                         <h4 style={{textAlign : 'center'}}>Login</h4>
                         <Form className='form-container' style={{border:'3px solid whitesmoke',borderRadius:'5px'}}>
                             <Form.Group controlId="formBasicEmail">
-                                <Form.Label>Username</Form.Label>
-                                <Form.Control type="text" name="username" value={this.state.username} onChange={this.changeValue} placeholder="Enter Username" />
+                                <Form.Label>Email</Form.Label>
+                                <Form.Control type="text" name="email"  ref={emailRef} placeholder="Enter Email" />
                             </Form.Group>
 
                             <Form.Group controlId="formBasicPassword">
                                 <Form.Label>Password</Form.Label>
-                                <Form.Control type="password" onChange={this.changeValue} name="password" value={this.state.password} placeholder="Password" />
+                                <Form.Control type="password"  name="password" ref={passwordRef}  placeholder="Password" />
                             </Form.Group>
-                            <Button variant="primary" onClick={this.login} type="submit">
+                            <Button variant="primary" disabled={loading} onClick={handleSubmit} type="submit">
                                 Login
                             </Button><br/>
-                            <a href={{}} style={{textAlign : 'center',marginTop:'10px'}}>Forgot Password?</a>
+                            <Link style={{textAlign : 'center',marginTop:'10px'}}>Forgot Password?</Link>
                         </Form>
-                        
-                        <h6 style={{textAlign : 'center',margin : '10px 140px'}}>Need an Account? <a href={{}} >Sign Up</a></h6>
+                        <h6 style={{textAlign : 'center',margin : '10px 140px'}}>Need an Account? <Link to="/signup">Sign Up</Link></h6>
                     </div>
                     
             </React.Fragment>
-    }
+    
 }
-
-export default Login;
