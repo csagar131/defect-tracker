@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert'
 import './login.css';
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import useAuth from '../contexts/AuthContext';
 
 
@@ -14,6 +14,7 @@ export default function Login(){
     const emailRef = useRef();
     const passwordRef = useRef();
     const {login} = useAuth();
+    const history = useHistory()
     
     async function handleSubmit(e){
         e.preventDefault();
@@ -25,6 +26,7 @@ export default function Login(){
             try{
                 setError('')
                 await login(emailRef.current.value,passwordRef.current.value)
+                history.push("/")
             } catch (error) {
                 return setError('Login Failed')
             }
@@ -52,9 +54,8 @@ export default function Login(){
                             </Button><br/>
                             <Link style={{textAlign : 'center',marginTop:'10px'}}>Forgot Password?</Link>
                         </Form>
-                        <h6 style={{textAlign : 'center',margin : '10px 140px'}}>Need an Account? <Link to="/signup">Sign Up</Link></h6>
+                        <h6 style={{textAlign : 'center',margin : '10px 100px'}}>Need an Account? <Link to="/signup">Sign Up</Link></h6>
                     </div>
                     
             </React.Fragment>
-    
 }

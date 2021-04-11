@@ -12,6 +12,13 @@ class FilterView extends React.Component {
     };
   }
 
+  componentDidMount(){
+    this.setState({
+      category: "ALL",
+      priority: "ALL",
+    })
+  }
+
   handleChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value,
@@ -42,7 +49,7 @@ class FilterView extends React.Component {
                 name="priority"
                 value={this.state.priority}
                 className="form-select">
-                <option>All</option>
+                <option>ALL</option>
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>
@@ -57,7 +64,7 @@ class FilterView extends React.Component {
                 name="category"
                 value={this.state.category}
                 className="form-select form-select-sm">
-                <option>All</option>
+                <option>ALL</option>
                 <option>UI</option>
                 <option>UX</option>
               </select>

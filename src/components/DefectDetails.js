@@ -1,25 +1,36 @@
 import React from 'react';
 import './DefectDetails.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import CloseButton from './CloseButton';
 
 class DefectDetails extends React.Component{
-
+    constructor(){
+        super();
+        this.state = {
+            btnDisableState : false,
+        }
+    }
+    
     closeDefect = (e) =>{
         const tableRowChildren = e.target.parentElement.parentElement.children;
         const localStorageData = JSON.parse(localStorage.getItem('defects'))   
         let requiredIndex = '';
 
         localStorageData.forEach((element,index) => {
-            console.log(element)
             if(element.category === tableRowChildren[0].innerText && element.description === tableRowChildren[1].innerText){
                 requiredIndex = index;
+                if(tableRowChildren[3].innerText === 'open'){
+                    this.props.closeDefect(requiredIndex);  //caliing parent component method using this.props
+                    // this.setState({
+                    //     btnDisableState : true,
+                    // })
+                }
             }
         });
-        this.props.closeDefect(requiredIndex);  //caliing parent component method using this.props
     }
 
 
-    render(){
+    render(){   
         let defects = '';
         if(this.props.filterDetails === null || this.props.filterDetails === undefined){
             defects = JSON.parse(localStorage.getItem('defects'))  
@@ -27,7 +38,7 @@ class DefectDetails extends React.Component{
         else{
             defects = JSON.parse(localStorage.getItem('defects')).filter(
                 defectData => {
-                    if(this.props.filterDetails.category === 'All' && this.props.filterDetails.priority === 'All'){
+                    if(this.props.filterDetails.category === "ALL" && this.props.filterDetails.priority === "ALL"){
                         return true;
                     }
                     else{
@@ -36,11 +47,9 @@ class DefectDetails extends React.Component{
                             result = true;
                         }
                         else if(defectData.category === this.props.filterDetails.category){
-                            console.log(defectData)
                             result = true;
                         }
                         else if(defectData.priority === this.props.filterDetails.priority){
-                            console.log(defectData)
                             result =  true;
                         }
                         return result;
@@ -48,9 +57,9 @@ class DefectDetails extends React.Component{
                     
                 }
             )
-            // console.log(defects)
         }
         return(
+            
            <div id='main-section-defect-details' className="shadow-lg p-3 mb-5 bg-body rounded">
                <h3 style={{color : 'white'}}>Defect  Details</h3>
                <p style={{color : 'red'}}>Search Result : {defects.length}</p>
@@ -73,7 +82,7 @@ class DefectDetails extends React.Component{
                                         <td>{defect.description}</td>
                                         <td>{defect.priority}</td>
                                         <td>{defect.status}</td>
-                                        <td><button className="btn btn-outline-warning text-dark" onClick={this.closeDefect}>close defect</button></td>
+                                        <td><CloseButton btnDisableState={this.state.btnDisableState} closeDefect={this.closeDefect}/></td>
                                     </tr>
                                 )
                             })}

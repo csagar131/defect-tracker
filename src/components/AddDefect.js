@@ -90,6 +90,8 @@ class AddDefect extends React.Component {
               <option>Select</option>
               <option>UI</option>
               <option>UX</option>
+              <option>Backend</option>
+              <option>General</option>
             </select>
           </div>
           <div>
@@ -102,12 +104,17 @@ class AddDefect extends React.Component {
           </div>
           <div>
             <p style={{ display: "inline" }}>Priority</p>
-            <input className="form-control"
-              type="text"
+            <select className="form-control"
               name="priority"
               onChange={this.handleChange}
               value={this.state.priority}
-            />
+            >
+            <option>Select</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+
+            </select>
           </div>
           <button className="btn btn-primary">Add Defect</button>
         </div>
