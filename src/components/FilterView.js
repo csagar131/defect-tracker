@@ -25,16 +25,6 @@ class FilterView extends React.Component {
     });
   };
 
-  closeDefect = (closeIndex) => {
-    const defects =  JSON.parse(localStorage.getItem("defects"));
-    defects.forEach( (element,index) => {
-       if(index === closeIndex){
-         element.status = 'closed';
-       }
-    });
-    localStorage.setItem("defects", JSON.stringify(defects));
-    this.setState({});
-    }
 
   render() {
     return (
@@ -70,7 +60,7 @@ class FilterView extends React.Component {
               </select>
             </div>
           </div>
-        <DefectDetails filterDetails={this.state} closeDefect = {this.closeDefect} />
+        <DefectDetails filterDetails={this.state}/>
       </React.Fragment>
     );
   }

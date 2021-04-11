@@ -2,8 +2,6 @@ import React from "react";
 
 function CloseButton(props) {
   
-
-
   function closeDefect(e) {
     props.closeDefect(e);
    

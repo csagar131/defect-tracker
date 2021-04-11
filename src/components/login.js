@@ -26,7 +26,7 @@ export default function Login(){
             try{
                 setError('')
                 await login(emailRef.current.value,passwordRef.current.value)
-                history.push("/")
+                history.push("/filterView")
             } catch (error) {
                 return setError('Login Failed')
             }
@@ -37,8 +37,7 @@ export default function Login(){
         return  <React.Fragment>
                     <div className='form-wrapper shadow-lg p-3 mb-5 bg-body rounded'>
                         {error && <Alert variant='danger'>{error}</Alert>}
-                        <h2 style={{textAlign : 'center'}}>Defect Tracker</h2>
-                        <h4 style={{textAlign : 'center'}}>Login</h4>
+                        <h2 style={{textAlign : 'center'}}>Login</h2>
                         <Form className='form-container' style={{border:'3px solid whitesmoke',borderRadius:'5px'}}>
                             <Form.Group controlId="formBasicEmail">
                                 <Form.Label>Email</Form.Label>
