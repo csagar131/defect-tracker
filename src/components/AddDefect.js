@@ -24,8 +24,6 @@ class AddDefect extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-
-
     if(this.state.category === '' || this.state.priority === '' || this.state.description ===''){
         alert('please provide all the details')
     }

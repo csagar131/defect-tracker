@@ -4,12 +4,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import CloseButton from "./CloseButton";
 
 class DefectDetails extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      btnDisableState: false,
-    };
-  }
 
   closeDefect = (e) => {
     const tableRowChildren = e.target.parentElement.parentElement.children;
@@ -101,10 +95,18 @@ class DefectDetails extends React.Component {
                     <td>{defect.priority}</td>
                     <td>{defect.status}</td>
                     <td>
-                      <CloseButton
-                        btnDisableState={this.state.btnDisableState}
-                        closeDefect={this.closeDefect}
-                      />
+                    {(() => {
+                      switch (defect.status) {
+                        case "open":   return (<CloseButton
+                          btnDisableState={false}
+                          closeDefect={this.closeDefect}
+                          />);
+                        default:      return (<CloseButton
+                          btnDisableState={true}
+                          closeDefect={this.closeDefect}
+                          />);
+                      }
+                    })()}
                     </td>
                   </tr>
                 );
