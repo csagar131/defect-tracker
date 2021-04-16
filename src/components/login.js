@@ -53,7 +53,7 @@ export default function Login(){
                             </Button><br/>
                             <Link style={{textAlign : 'center',marginTop:'10px'}}>Forgot Password?</Link>
                         </Form>
-                        <h6 style={{textAlign : 'center',margin : '10px 100px'}}>Need an Account? <Link to="/signup">Sign Up</Link></h6>
+                        <h6 style={{textAlign : 'center',margin : '10px 100px'}}>Need an Account? <Link to="/">Sign Up</Link></h6>
                     </div>
                     
             </React.Fragment>

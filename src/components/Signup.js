@@ -28,7 +28,7 @@ export default function Signup(props) {
         try{
             setError('')
             await signup(emailRef.current.value,passwordRef.current.value)
-            history.push("/")
+            history.push("/filterView")
         } catch (error) {
             return setError("Signup Failed")
         }
